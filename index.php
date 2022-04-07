@@ -13,6 +13,7 @@ require("utils.php");
 		<script>
 			function showFull(imgSrc, title, src, srcLink, text, link)
 			{
+				document.body.style.overflow = "hidden";
 				document.getElementById("fullBackground").style.display = "block";
 				document.getElementById("fullArticle").style.display = "block";
 				document.getElementById("fullImg").src = imgSrc;
@@ -36,6 +37,7 @@ require("utils.php");
 
 			function closeWindow()
 			{
+				document.body.style.overflow = "auto";
 				document.getElementById("fullBackground").style.display = "none";
 				document.getElementById("fullArticle").style.display = "none";
 				document.getElementById("fullSrc").classList.remove("withLink");

@@ -150,19 +150,19 @@ function showArticlePreview($article, $showSource, $id)
 			{
 				print(" noSource");
 			}
-			$titleToSend = $text = preg_replace("/\"/", "doubleQuote", $title);
-			$titleToSend = str_replace("'", "singleQuote", $titleToSend);
+			$titleToSend = $text = preg_replace("/\"/", "\\\"", $title);
+			$titleToSend = str_replace("'", "\\'", $titleToSend);
 
-			$text = preg_replace("/\n/", "newLine", $article->content);
+			$text = preg_replace("/\n/", "\\n", $article->content);
 			$text = preg_replace("/\r/", "", $text);
-			$text = preg_replace("/\"/", "doubleQuote", $text);
-			$text = str_replace("'", "singleQuote", $text);
+			$text = preg_replace("/\"/", "\\\"", $text);
+			$text = str_replace("'", "\\'", $text);
 			if (strrpos($text, " [+") > 0)
 			{
 				$text = substr($text, 0, strrpos($text, " [+"));
 			}
 			print("' onclick=\"showFull('" . $article->urlToImage ."', '" . $titleToSend . "', '" . $source . "', " . $linkToSrc . ", '" . $text . "', '" . $article->url . "');\">");
-				print("<img class='previewImage' src='" . $article->urlToImage . "' alt='Article image'>");
+			print("<img class='previewImage' src='" . $article->urlToImage . "' alt='Article image'>");
 			print("<div class='title'>" . $title . "</div>");
 			if ($showSource)
 			{
@@ -185,13 +185,15 @@ function showArticlePreview($article, $showSource, $id)
 function initializeFullArticleView()
 {
 	print("<div id='fullArticle'>
-				<div id='closeWindow' onclick='closeWindow();'>X</div>
+				<div id='closeWindow' onclick='closeWindow();'><span class='cross'></span></div>
 				<img id='fullImg' src='' alt='Article image'>
+				<hr>
 				<div id='titleSrcWrapper'>
 					<strong><div id='fullTitle'></div></strong>
 					<div id='fullSrc'></div>
 				</div>
 				<div id='fullText'></div>
+				<hr>
 				<div id='aricleLinkWrapper'>
 					<a id='articleLink' href='' target='_blank'>Read full article</a>
 				</div>
